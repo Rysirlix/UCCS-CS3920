@@ -119,6 +119,15 @@ def convert_responses_to_scenario(input_file: str = "mock_responses.yml",
     
     print(f"✓ Created detailed responses: {detailed_file} (for reference)")
 
+def create_integration_instructions(caldera_path: str | None) -> None:
+    with open("MOCK_PLUGIN_INTEGRATION.md", "w") as f:
+        f.write("# Mock Plugin Integration\n\n")
+        if caldera_path:
+            f.write(f"- Copy agents.yml to {caldera_path}/plugins/mock/conf/agents.yml\n")
+            f.write(f"- Copy scenario_*.yml to {caldera_path}/plugins/mock/conf/scenarios/\n")
+        else:
+            f.write("- Copy agents.yml to <caldera>/plugins/mock/conf/agents.yml\n")
+            f.write("- Copy scenario_*.yml to <caldera>/plugins/mock/conf/scenarios/\n")
 
 def main():
     import argparse
