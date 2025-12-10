@@ -1,0 +1,122 @@
+[
+  {
+    "rank": 1,
+    "utility": 4.432499432295277,
+    "probability": 0.42,
+    "impact": 6.0,
+    "detectability": 0.8,
+    "time": 3.0,
+    "steps": [
+      "T1566 Compromised_Credentials",
+      "T1068 Exploit CVE-2021-34527"
+    ]
+  },
+  {
+    "rank": 2,
+    "utility": 4.432499432295277,
+    "probability": 0.42,
+    "impact": 6.0,
+    "detectability": 0.8,
+    "time": 3.0,
+    "steps": [
+      "T1566 Compromised_Credentials",
+      "T1068 Exploit CVE-2021-34527"
+    ]
+  },
+  {
+    "rank": 3,
+    "utility": 4.432499432295277,
+    "probability": 0.42,
+    "impact": 6.0,
+    "detectability": 0.8,
+    "time": 3.0,
+    "steps": [
+      "T1566 Compromised_Credentials",
+      "T1068 Exploit CVE-2020-1472"
+    ]
+  },
+  {
+    "rank": 4,
+    "utility": 3.8435029315625897,
+    "probability": 0.24499999999999997,
+    "impact": 6.0,
+    "detectability": 0.8999999999999999,
+    "time": 3.0,
+    "steps": [
+      "T1566 Phishing",
+      "T1068 Exploit CVE-2021-34527"
+    ]
+  },
+  {
+    "rank": 5,
+    "utility": 3.8435029315625897,
+    "probability": 0.24499999999999997,
+    "impact": 6.0,
+    "detectability": 0.8999999999999999,
+    "time": 3.0,
+    "steps": [
+      "T1566 Phishing",
+      "T1068 Exploit CVE-2021-34527"
+    ]
+  },
+  {
+    "rank": 6,
+    "utility": 3.8435029315625897,
+    "probability": 0.24499999999999997,
+    "impact": 6.0,
+    "detectability": 0.8999999999999999,
+    "time": 3.0,
+    "steps": [
+      "T1566 Phishing",
+      "T1068 Exploit CVE-2020-1472"
+    ]
+  },
+  {
+    "rank": 7,
+    "utility": 2.5324994322952774,
+    "probability": 0.42,
+    "impact": 4.0,
+    "detectability": 0.6000000000000001,
+    "time": 3.0,
+    "steps": [
+      "T1566 Compromised_Credentials",
+      "T1068 Exploit CVE-2021-1236"
+    ]
+  },
+  {
+    "rank": 8,
+    "utility": 1.9435029315625896,
+    "probability": 0.24499999999999997,
+    "impact": 4.0,
+    "detectability": 0.7,
+    "time": 3.0,
+    "steps": [
+      "T1566 Phishing",
+      "T1068 Exploit CVE-2021-1236"
+    ]
+  },
+  {
+    "rank": 9,
+    "utility": 0.9728836443598543,
+    "probability": 0.24,
+    "impact": 3.0,
+    "detectability": 0.7,
+    "time": 2.5,
+    "steps": [
+      "T1566 Compromised_Credentials",
+      "T1021 Remote Services"
+    ]
+  },
+  {
+    "rank": 10,
+    "utility": 0.9728836443598543,
+    "probability": 0.24,
+    "impact": 3.0,
+    "detectability": 0.7,
+    "time": 2.5,
+    "steps": [
+      "T1566 Compromised_Credentials",
+      "T1021 Remote Services"
+    ]
+  }
+]

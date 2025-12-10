@@ -1,0 +1,35 @@
+ad_controller_T1003:
+  detected: true
+  output: Credentials dumped successfully. Found 15 user hashes.
+  pid: 1234
+  status: success
+ad_controller_T1068:
+  detected: true
+  output: 'Privilege escalation successful using CVE-2021-34527. Current user: SYSTEM'
+  pid: 1234
+  status: success
+ad_controller_T1212:
+  detected: true
+  output: Command executed with elevated privileges
+  pid: 1234
+  status: success
+ad_controller_T1558:
+  detected: true
+  output: Command executed with elevated privileges
+  pid: 1234
+  status: success
+fileserver_T1068:
+  detected: true
+  output: 'Privilege escalation successful using CVE-2021-34527. Current user: SYSTEM'
+  pid: 1234
+  status: success
+fileserver_T1212:
+  detected: true
+  output: Command executed with elevated privileges
+  pid: 1234
+  status: success
+user_workstations_T1059:
+  detected: false
+  output: Command executed successfully.
+  pid: 1234
+  status: success

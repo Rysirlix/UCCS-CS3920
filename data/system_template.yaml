@@ -1,0 +1,142 @@
+# System Topology Template
+# Users fill this out to describe their network for attack graph generation
+
+network:
+  name: "Corporate Network"
+  description: "Main office network with DMZ and internal segments"
+  
+  subnets:
+    # Bulk workstation subnet
+    - name: "user_workstations"
+      description: "Employee workstations"
+      count: 50  # Number of similar hosts
+      os: ["Windows 10", "Windows 11"]
+      services: ["SMB", "RDP"]
+      privilege_level: "User"
+      
+    # Individual critical servers
+    - name: "servers"
+      description: "Critical infrastructure"
+      hosts:
+        - name: "fileserver"
+          os: "Windows Server 2019"
+          services: ["SMB", "AD"]
+          privilege_level: "Elevated"
+          critical: true
+          data_classification: "confidential"
+          
+        - name: "ad_controller"
+          os: "Windows Server 2022"
+          services: ["LDAP", "Kerberos", "DNS"]
+          privilege_level: "Administrator"
+          critical: true
+          data_classification: "restricted"
+          
+        - name: "web_server"
+          os: "Ubuntu 20.04"
+          services: ["HTTP", "HTTPS", "SSH"]
+          privilege_level: "User"
+          exposed_to_internet: true
+          
+        - name: "database_server"
+          os: "RedHat Enterprise Linux 8"
+          services: ["PostgreSQL", "SSH"]
+          privilege_level: "User"
+          critical: true
+          data_classification: "restricted"
+
+# Known vulnerabilities in the environment
+vulnerabilities:
+  - cve: "CVE-2021-1236"
+    affects: ["ad_controller"]
+    severity: "high"
+    description: "Privilege escalation vulnerability"
+    exploitable: true
+    
+  - cve: "CVE-2021-34527"
+    affects: ["fileserver", "ad_controller"]
+    severity: "critical"
+    description: "PrintNightmare - Remote code execution"
+    exploitable: true
+    
+  - cve: "CVE-2020-1472"
+    affects: ["ad_controller"]
+    severity: "critical"
+    description: "Zerologon - Netlogon elevation of privilege"
+    exploitable: true
+    
+  - cve: "CVE-2019-0708"
+    affects: ["user_workstations"]
+    severity: "high"
+    description: "BlueKeep RDP vulnerability"
+    exploitable: true
+    patch_status: "partial"
+
+# How attackers might gain initial access
+access_points:
+  - type: "phishing"
+    target_subnet: "user_workstations"
+    success_rate: 0.35
+    detection_rate: 0.3
+    description: "Email phishing campaign targeting employees"
+    
+  - type: "web_exploit"
+    target_host: "web_server"
+    success_rate: 0.45
+    detection_rate: 0.5
+    description: "SQL injection on public web application"
+    
+  - type: "compromised_credentials"
+    target_subnet: "user_workstations"
+    success_rate: 0.60
+    detection_rate: 0.2
+    description: "Credentials from previous breach"
+
+# Security controls in place
+security_controls:
+  endpoint_protection:
+    enabled: true
+    product: "Windows Defender"
+    coverage: 0.8  # 80% of endpoints
+    
+  network_monitoring:
+    enabled: true
+    product: "Splunk"
+    detection_capability: 0.6
+    
+  firewall:
+    enabled: true
+    segments: ["DMZ", "Internal"]
+    rules_strictness: 0.7
+    
+  mfa:
+    enabled: true
+    coverage: 0.4  # Only 40% of accounts
+    admin_accounts_only: true
+
+# High value targets / goals for attack paths
+high_value_targets:
+  - name: "domain_admin"
+    asset: "ad_controller"
+    value: 10
+    
+  - name: "exfiltrated_sensitive_docs"
+    asset: "fileserver"
+    value: 8
+    
+  - name: "database_access"
+    asset: "database_server"
+    value: 9
+    
+  - name: "customer_pii"
+    asset: "database_server"
+    value: 10
+
+# Additional metadata
+metadata:
+  organization: "Example Corp"
+  network_size: "medium"
+  industry: "technology"
+  compliance_requirements: ["SOC2", "GDPR"]
+  last_pentest: "2024-03-15"
+  risk_tolerance: "low"

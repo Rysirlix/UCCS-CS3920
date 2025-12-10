@@ -1,0 +1,170 @@
+assets:
+- database_server
+- exfiltrated_sensitive_docs
+- exfiltrated_database_server_data
+- domain_admin
+- ad_controller
+- fileserver
+- compromised_credentials_entry
+- exfiltrated_ad_controller_data
+- web_exploit_entry
+- web_server
+- user_workstations
+- database_access
+- customer_pii
+- phishing_entry
+- exfiltrated_fileserver_data
+edges:
+- detect: 0.3
+  dst: user_workstations
+  impact: 1.0
+  p: 0.35
+  src: phishing_entry
+  status: in_progress
+  technique: T1566 Phishing
+  time: 1.0
+- detect: 0.5
+  dst: web_server
+  impact: 1.0
+  p: 0.45
+  src: web_exploit_entry
+  technique: T1566 Web_Exploit
+  time: 1.0
+- detect: 0.2
+  dst: user_workstations
+  impact: 1.0
+  p: 0.6
+  src: compromised_credentials_entry
+  status: in_progress
+  technique: T1566 Compromised_Credentials
+  time: 1.0
+- detect: 0.4
+  dst: ad_controller
+  impact: 3.0
+  p: 0.7
+  src: user_workstations
+  technique: T1068 Exploit CVE-2021-1236
+  time: 2.0
+- detect: 0.6
+  dst: fileserver
+  impact: 5.0
+  p: 0.7
+  src: user_workstations
+  status: in_progress
+  technique: T1068 Exploit CVE-2021-34527
+  time: 2.0
+- detect: 0.6
+  dst: ad_controller
+  impact: 5.0
+  p: 0.7
+  src: user_workstations
+  status: in_progress
+  technique: T1068 Exploit CVE-2021-34527
+  time: 2.0
+- detect: 0.6
+  dst: ad_controller
+  impact: 5.0
+  p: 0.7
+  src: user_workstations
+  status: in_progress
+  technique: T1068 Exploit CVE-2020-1472
+  time: 2.0
+- detect: 0.4
+  dst: user_workstations
+  impact: 3.0
+  p: 0.7
+  src: user_workstations
+  technique: T1068 Exploit CVE-2019-0708
+  time: 2.0
+- detect: 0.5
+  dst: fileserver
+  impact: 2.0
+  p: 0.4
+  src: user_workstations
+  technique: T1021 Remote Services
+  time: 1.5
+- detect: 0.5
+  dst: ad_controller
+  impact: 2.0
+  p: 0.4
+  src: user_workstations
+  technique: T1021 Remote Services
+  time: 1.5
+- detect: 0.5
+  dst: web_server
+  impact: 2.0
+  p: 0.4
+  src: user_workstations
+  technique: T1021 Remote Services
+  time: 1.5
+- detect: 0.5
+  dst: database_server
+  impact: 2.0
+  p: 0.4
+  src: user_workstations
+  technique: T1021 Remote Services
+  time: 1.5
+- detect: 0.5
+  dst: domain_admin
+  impact: 2.0
+  p: 0.4
+  src: user_workstations
+  technique: T1021 Remote Services
+  time: 1.5
+- detect: 0.5
+  dst: exfiltrated_sensitive_docs
+  impact: 2.0
+  p: 0.4
+  src: user_workstations
+  technique: T1021 Remote Services
+  time: 1.5
+- detect: 0.5
+  dst: database_access
+  impact: 2.0
+  p: 0.4
+  src: user_workstations
+  technique: T1021 Remote Services
+  time: 1.5
+- detect: 0.5
+  dst: customer_pii
+  impact: 2.0
+  p: 0.4
+  src: user_workstations
+  technique: T1021 Remote Services
+  time: 1.5
+- detect: 0.7
+  dst: exfiltrated_fileserver_data
+  impact: 5.0
+  p: 0.6
+  src: fileserver
+  technique: T1041 Exfiltration Over C2
+  time: 2.0
+- detect: 0.7
+  dst: exfiltrated_ad_controller_data
+  impact: 8.0
+  p: 0.6
+  src: ad_controller
+  technique: T1041 Exfiltration Over C2
+  time: 2.0
+- detect: 0.7
+  dst: exfiltrated_database_server_data
+  impact: 8.0
+  p: 0.6
+  src: database_server
+  technique: T1041 Exfiltration Over C2
+  time: 2.0
+goal_nodes:
+- database_server
+- exfiltrated_sensitive_docs
+- database_access
+- exfiltrated_database_server_data
+- domain_admin
+- customer_pii
+- exfiltrated_fileserver_data
+- ad_controller
+- exfiltrated_ad_controller_data
+- fileserver
+start_nodes:
+- compromised_credentials_entry
+- web_exploit_entry
+- phishing_entry

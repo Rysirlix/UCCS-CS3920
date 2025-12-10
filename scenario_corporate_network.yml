@@ -1,0 +1,7 @@
+name: corporate_network
+type: advanced
+responses:
+- ability_id: 7049e3ec-b822-4fdf-a4ac-18190f9b66d1
+- ability_id: a0676fe1-cd52-482e-8dde-349b73f9aa69
+- ability_id: 3a2ce3d5-e9e2-4344-ae23-470432ff8687
+- ability_id: 1b4fb81c-8090-426c-93ab-0c4ec6ac0385

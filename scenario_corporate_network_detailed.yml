@@ -1,0 +1,52 @@
+1b4fb81c-8090-426c-93ab-0c4ec6ac0385:
+  ability_id: 1b4fb81c-8090-426c-93ab-0c4ec6ac0385
+  hosts:
+    user_workstations:
+      detected: false
+      output: Command executed successfully.
+      pid: 1234
+      status: success
+  output: Command executed successfully.
+  status: success
+3a2ce3d5-e9e2-4344-ae23-470432ff8687:
+  ability_id: 3a2ce3d5-e9e2-4344-ae23-470432ff8687
+  hosts:
+    ad_controller:
+      detected: true
+      output: Command executed with elevated privileges
+      pid: 1234
+      status: success
+    fileserver:
+      detected: true
+      output: Command executed with elevated privileges
+      pid: 1234
+      status: success
+  output: Command executed with elevated privileges
+  status: success
+7049e3ec-b822-4fdf-a4ac-18190f9b66d1:
+  ability_id: 7049e3ec-b822-4fdf-a4ac-18190f9b66d1
+  hosts:
+    ad_controller:
+      detected: true
+      output: Command executed with elevated privileges
+      pid: 1234
+      status: success
+  output: Credentials dumped successfully. Found 15 user hashes.
+  status: success
+a0676fe1-cd52-482e-8dde-349b73f9aa69:
+  ability_id: a0676fe1-cd52-482e-8dde-349b73f9aa69
+  hosts:
+    ad_controller:
+      detected: true
+      output: 'Privilege escalation successful using CVE-2021-34527. Current user:
+        SYSTEM'
+      pid: 1234
+      status: success
+    fileserver:
+      detected: true
+      output: 'Privilege escalation successful using CVE-2021-34527. Current user:
+        SYSTEM'
+      pid: 1234
+      status: success
+  output: 'Privilege escalation successful using CVE-2021-34527. Current user: SYSTEM'
+  status: success
