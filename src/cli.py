@@ -10,7 +10,7 @@ except ImportError:
     yaml = None
 
 from graph import AttackGraph
-from planner import rank_paths, edge_risk_contributions
+from planner import rank_paths, edge_risk_contributions, explain_path, suggest_mitigations
 from env_tools import validate_env
 
 
@@ -107,11 +107,31 @@ def cmd_edges(args):
 
     items = sorted(contrib.items(), key=lambda kv: kv[1], reverse=True)
     print(f"Top {args.limit} edges by aggregated expected loss contribution:")
-    print(f"{'Rank':<4} {'Src':<20} {'Dst':<25} {'Technique':<35} {'E[L] contrib]':>12}")
+    print(f"{'Rank':<4} {'Src':<20} {'Dst':<25} {'Technique':<35} {'E[L] contrib':>12}")
     print("-" * 100)
     for i, (key, val) in enumerate(items[: args.limit], 1):
         src, dst, tech = key
         print(f"{i:<4} {src:<20} {dst:<25} {tech:<35} {val:>12.2f}")
+
+    if args.mitigations > 0:
+        print()
+        print(f"Top {args.mitigations} technique-level mitigations:")
+        print("-" * 100)
+        mitigs = suggest_mitigations(contrib, limit=args.mitigations)
+        for i, m in enumerate(mitigs, 1):
+            tech_id = m["tech_id"]
+            total = m["total_expected_loss"]
+            print(f"{i}. {tech_id}  (total E[L] ≈ {total:.2f})")
+            print(f"   Mitigation: {m['mitigation']}")
+            if m["examples"]:
+                print("   Example edges:")
+                for ex in m["examples"]:
+                    print(
+                        f"     - {ex['src']} -> {ex['dst']} "
+                        f"via {ex['technique']} "
+                        f"(E[L] ≈ {ex['edge_expected_loss']:.2f})"
+                    )
+            print("-" * 100)
 
 
 def cmd_validate(args):
@@ -179,6 +199,7 @@ def build_arg_parser():
     ap_plan.add_argument("--wT", type=float, default=0.1)
     ap_plan.add_argument("--wP", type=float, default=1.0)
     ap_plan.add_argument("--json-out")
+    ap_plan.add_argument("--explain", type=int, default=0)
     ap_plan.set_defaults(func=cmd_plan)
 
     # edges
@@ -189,6 +210,7 @@ def build_arg_parser():
     ap_edges.add_argument("--max-depth", type=int, default=5)
     ap_edges.add_argument("--top-k", type=int, default=10)
     ap_edges.add_argument("--limit", type=int, default=15)
+    ap_edges.add_argument("--mitigations", type=int, default=5)
     ap_edges.set_defaults(func=cmd_edges)
 
     # validate
@@ -219,6 +241,13 @@ def build_report(cfg, max_depth, top_k, wI, wD, wT, wP):
         wP=wP,
         top_k=top_k,
     )
+    if getattr(args, "explain", 0) > 0:
+    print()
+    print(f"Detailed explanation for top {args.explain} path(s):")
+    print("-" * 70)
+    for i, entry in enumerate(ranked[: args.explain], 1):
+        print(explain_path(entry, idx=i))
+        print("-" * 70)
 
     # edge-level risk contributions
     edge_contrib = edge_risk_contributions(ranked)
