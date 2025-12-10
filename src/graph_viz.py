@@ -742,7 +742,7 @@ def history():
 
 @app.route('/report.json')
 def report_json():
-    cfg = load_env_yaml("data/env.yaml")
+    cfg = load_env_yaml()
     g = AttackGraph(cfg["assets"], cfg["start_nodes"], cfg["goal_nodes"], cfg["edges"])
     paths = g.enumerate_paths(max_depth=5)
     ranked = rank_paths(paths, top_k=5)
