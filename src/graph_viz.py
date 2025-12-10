@@ -15,7 +15,7 @@ if str(repo_dir) not in sys.path:
     sys.path.insert(0, str(repo_dir))
 
 from graph import AttackGraph
-from planner import rank_paths
+from planner import rank_paths, edge_risk_contributions
 
 # Try to import Caldera integration
 try:
